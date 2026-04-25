@@ -75,20 +75,19 @@ def render():
     )
     st.plotly_chart(fig, width='stretch')
 
-    # Pie chart: Top explanations
-    if label_filter != "Anomalous only":
-        st.markdown("#### Top Explanations for UAP Sightings")
-        expl = filtered[filtered['is_anomalous'] == 0]['Explanation'].value_counts().head(10)
-        fig_pie = go.Figure(go.Pie(
-            labels=expl.index,
-            values=expl.values,
-            hole=0.4,
-        ))
-        fig_pie.update_layout(
-            margin=dict(t=0, b=0, l=0, r=0),
-            height=400,
-        )
-        st.plotly_chart(fig_pie, width='stretch')
+    # Pie chart: Top explanations (always shows explainable sightings)
+    st.markdown("#### Top Explanations for UAP Sightings")
+    expl = df[df['is_anomalous'] == 0]['Explanation'].value_counts().head(10)
+    fig_pie = go.Figure(go.Pie(
+        labels=expl.index,
+        values=expl.values,
+        hole=0.4,
+    ))
+    fig_pie.update_layout(
+        margin=dict(t=0, b=0, l=0, r=0),
+        height=400,
+    )
+    st.plotly_chart(fig_pie, width='stretch')
 
     # Raw data
     with st.expander("View Raw Data"):
