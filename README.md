@@ -3,7 +3,7 @@
 
 A machine learning web application that classifies UAP sighting reports as anomalous or explainable, built to support investigators in triaging incoming reports.
 
-**Live app:** [STREAMLIT URL PLACEHOLDER]
+**Live App:** https://uap-anomaly-classifier.streamlit.app/ 
 ---
 
 ## Project Overview
