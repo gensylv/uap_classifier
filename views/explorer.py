@@ -17,26 +17,24 @@ def render():
     st.markdown("---")
 
     # Filters
-    col1, col2, col3 = st.columns(3)
+    st.markdown("#### Sightings by Shape")
+    col1, col2 = st.columns(2)
     with col1:
         label_filter = st.selectbox("Label", ["All", "Anomalous only", "Explainable only"])
     with col2:
-        shape_filter = st.selectbox("Shape", ["All"] + sorted(df['Shape'].unique().tolist()))
+        shape_filter = st.multiselect("Compare Shapes", sorted(df['Shape'].unique().tolist()))
 
     filtered = df.copy()
     if label_filter == "Anomalous only":
         filtered = filtered[filtered['is_anomalous'] == 1]
     elif label_filter == "Explainable only":
         filtered = filtered[filtered['is_anomalous'] == 0]
-    if shape_filter != "All":
-        filtered = filtered[filtered['Shape'] == shape_filter]
 
-    st.markdown(f"**{len(filtered):,} reports match your filters**")
-    st.markdown("---")
+    shape_data = filtered[filtered['Shape'].isin(shape_filter)] if shape_filter else filtered
+    st.markdown(f"**{len(shape_data):,} reports match your filters**")
 
-    # Shape distribution
-    st.markdown("#### Sightings by Shape")
-    shape_counts = filtered['Shape'].value_counts().head(15).reset_index()
+    # Shape distribution (uses Compare Shapes filter)
+    shape_counts = shape_data['Shape'].value_counts().head(15).reset_index()
     shape_counts.columns = ['Shape', 'Count']
     st.bar_chart(shape_counts.set_index('Shape'))
 
