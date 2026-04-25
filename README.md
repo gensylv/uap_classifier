@@ -64,16 +64,19 @@ nuforc.org
 
 If you prefer to run the application locally rather than accessing the live URL:
 
-1. Clone or download the repository
-2. Open a terminal and navigate to the project folder
-3. Install dependencies:
+1. Clone the repository:
+```bash
+git clone https://github.com/gensylv/uap_classifier.git
+```
+2. Navigate to the project folder and install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-4. Launch the app:
+3. Launch the app:
 ```bash
 streamlit run app.py
 ```
+
 5. Open your browser to `http://localhost:8501`
 
 ---
